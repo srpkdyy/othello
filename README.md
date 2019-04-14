@@ -1,2 +1,2 @@
-# othello
-This repository enable to play Othello in Python.
+# Reversi
+This repository enable to play Reversi in Python.
