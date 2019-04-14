@@ -4,11 +4,27 @@ from agents.randomer import Randomer
 
 from kivy.app import App
 from kivy.uix.widget import Widget
+from kivy.properties import StringProperty
 
 class ReversiGame(Widget):
-    pass
+    empty = StringProperty('')
+    black = StringProperty('')
+    white = StringProperty('')
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.empty = './images/empty.png'
+        self.black = './images/black.png'
+        self.white = './images/white.png'
+
 
 class ReversiApp(App):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.title = 'Reversi Game'
+
+
     def build(self):
         return ReversiGame()
 
@@ -53,5 +69,5 @@ def main():
 
         
 if __name__ == '__main__':
-    main()
     ReversiApp().run()
+    main()
