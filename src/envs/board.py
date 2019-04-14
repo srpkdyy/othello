@@ -35,6 +35,10 @@ class Board:
         return self.board_state.copy()
 
 
+    def render(self):
+        print(self.board_state)
+
+
     # direction: 2 dim tuple (x, y). value is -1, 0, or 1.
     def count_turn_over(self, color, pos, direction):
         pos, direction = np.asarray(pos, dtype=int), np.asarray(direction, dtype=int)
@@ -65,8 +69,8 @@ class Board:
 
 
     def exist_legal_move(self, color):
-        for y in range(1, self.board_shape[0]-2):
-            for x in range(1, self.board_shape[1]-2):
+        for y in range(1, self.board_shape[0]-1):
+            for x in range(1, self.board_shape[1]-1):
                 if self.can_be_put(color, (x, y)):
                     return True
         return False
@@ -77,10 +81,10 @@ class Board:
             return False
         
         self.board_state[pos] = color
-        for v_y in range(-1, 1):
-            for v_x in range(-1, 1):
+        for v_y in range(-1, 2):
+            for v_x in range(-1, 2):
                 if v_x == v_y == 0:
-                    pass
+                    continue
                 n_turn_over_pieces = self.count_turn_over(color, pos, (v_x, v_y))
                 self.turn_over_piece(pos, (v_x, v_y), n_turn_over_pieces)
         
@@ -102,8 +106,8 @@ class Board:
         n_black = len(self.board_state[self.board_state == self.black])
         n_white = len(self.board_state[self.board_state == self.white])
 
-        if   n_black > n_white: winner = 'black'
-        elif n_white > n_black: winner = 'white'
+        if   n_black > n_white: winner = 'player1'
+        elif n_white > n_black: winner = 'player2'
         else:                   winner = 'draw'
 
         board_state = self.get_board_state()

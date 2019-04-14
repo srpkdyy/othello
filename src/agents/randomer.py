@@ -3,12 +3,12 @@ import numpy as np
 
 
 
-class Human(player.Player):
+class Randomer(player.Player):
 
     def __init__(self):
         super().__init__()
 
 
     def move(self):
-        pos = map(int, input('x y :').split())
+        pos = np.random.randint(1, 9, size=2)
         return tuple(pos)
