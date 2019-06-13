@@ -10,5 +10,5 @@ class Human(player.Player):
 
 
     def move(self):
-        pos = map(int, input('x y :').split())
+        pos = map(int, input('y x :').split())
         return tuple(pos)

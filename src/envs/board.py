@@ -25,6 +25,8 @@ class Board:
 
         self.player_count = 0
 
+        self.kind_of_cell = ['・', '●', '○', '＃']
+
 
     def setup_player(self, player):
         self.player_count += 1
@@ -36,10 +38,14 @@ class Board:
 
 
     def render(self):
-        print(self.board_state)
+        for row in self.board_state:
+            for cell in row:
+                print(self.kind_of_cell[cell], end='')
+            print()
+        print()
 
 
-    # direction: 2 dim tuple (x, y). value is -1, 0, or 1.
+    # direction: 2 dim tuple (y, x). value is -1, 0, or 1.
     def count_turn_over(self, color, pos, direction):
         pos, direction = np.asarray(pos, dtype=int), np.asarray(direction, dtype=int)
 
@@ -71,7 +77,7 @@ class Board:
     def exist_legal_move(self, color):
         for y in range(1, self.board_shape[0]-1):
             for x in range(1, self.board_shape[1]-1):
-                if self.can_be_put(color, (x, y)):
+                if self.can_be_put(color, (y, x)):
                     return True
         return False
 
@@ -85,8 +91,8 @@ class Board:
             for v_x in range(-1, 2):
                 if v_x == v_y == 0:
                     continue
-                n_turn_over_pieces = self.count_turn_over(color, pos, (v_x, v_y))
-                self.turn_over_piece(pos, (v_x, v_y), n_turn_over_pieces)
+                n_turn_over_pieces = self.count_turn_over(color, pos, (v_y, v_x))
+                self.turn_over_piece(pos, (v_y, v_x), n_turn_over_pieces)
         
 
     def turn_over_piece(self, pos, direction, n_pieces):
@@ -114,8 +120,4 @@ class Board:
 
         return winner, n_black, n_white, board_state
 
-
-
-if __name__ == '__main__':
-    a = Board()
 

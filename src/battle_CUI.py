@@ -8,8 +8,8 @@ def main():
     field = Board()
     field.render()
 
-    player1 = Randomer()
-    player2 = Randomer()
+    player1 = Human()
+    player2 = Human()
     players = (player1, player2)
 
     field.setup_player(player1)
