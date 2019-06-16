@@ -112,8 +112,8 @@ class Board:
         n_black = len(self.board_state[self.board_state == self.black])
         n_white = len(self.board_state[self.board_state == self.white])
 
-        if   n_black > n_white: winner = 'player1'
-        elif n_white > n_black: winner = 'player2'
+        if   n_black > n_white: winner = 'black'
+        elif n_white > n_black: winner = 'white'
         else:                   winner = 'draw'
 
         board_state = self.get_board_state()
